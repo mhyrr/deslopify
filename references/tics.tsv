@@ -9,7 +9,7 @@ the-entire-is	\bthe entire [a-z ]{1,30} is\b
 is-real-and-not	\bis (the )?real([,;.]| and\b| but\b| not\b)
 the-punchline-is	\bthe punchline\b
 worth-naming	\bworth naming\b
-thats-not-nothing	\b(that|this|it|which) (is|.s) not nothing\b
+thats-not-nothing	\b(that|this|it|which)( is|'s|’s) not nothing\b
 is-the-whole-x	\bis the whole (point|trick|pitch|idea|thing|game|argument)\b|\bhere.s the whole\b
 performative-honesty	\b(i won.t pretend|i.ll be honest|let.s be honest|to be clear|to be honest)\b|(^|\. )(Honestly|Look),
 thats-the-part	\b(that.s|that is|this is) the part\b|\bmy favou?rite part\b

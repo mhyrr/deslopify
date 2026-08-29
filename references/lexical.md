@@ -1672,14 +1672,33 @@ Band on the salience score, which `scan.sh` prints beside every hit:
 | Salience | Ruling |
 |---|---|
 | **50+** (38 words) | Distinctive. One instance is worth reading in context; two of the same word is a finding. |
-| **30–49** | Density only. Cross-reference against the families above and `tics.md` before acting. |
+| **30–49** | Density band. Above **15 hits per 1,000 words** in this band, run the verb-first pass over it; below that, act only on an instance `scan.sh` marks `⨯` (it sits on a line a tic detector also hit). Cross-reference against the families above and `tics.md` before acting. |
 | **under 30** | Corroborating evidence, never a trigger. Do not edit a word because it appears here. |
 
 Calibration: four human-written technical READMEs (abseil, apache-arrow, aws-c-common,
 ada-url) scored **1.6–10.9 hits per 1,000 words with nothing above salience 50**; a
 paragraph of agent-written engineering prose scored **294/1k with 8 words above 50**. The
-raw hit count includes the ordinary words that score under 30, so read the 50+ count first. Treat **any two hits at 50+** as worth a close read. Below that,
-the list has told you nothing.
+raw hit count includes the ordinary words that score under 30, so read the 50+ count
+first. Treat **any two hits at 50+** as worth a close read. Below that, the list has
+told you nothing. The 15/1k trigger for the 30–49 band comes from three fixtures:
+model-written clean prose sits at 5.4, agent-written engineering prose at 19.6, the
+seeded tic fixture at 20.7. Three points is a first calibration, not a law.
+
+### Ruling an instance
+
+The list ranks words. The ruling is on an instance, in its sentence, and `scan.sh`
+prints what the sentence needs decided:
+
+- **`"quoted"`** — the word sits inside double quotes. The document is talking about
+  slop, not committing it. Skip.
+- **`⨯ tic-id`** — the word sits on a line a tic detector also hit. Read the
+  construction, not the word: `mattered` inside *"that's why X mattered"* is that
+  tic's symptom, and repairing the tic removes the word. This mark makes a 30–49
+  word actionable on its own; a 50+ word carrying it is two findings on one line.
+- **No mark** — read the sentence for the third question: is this the document's term
+  of art, defined once and repeated on purpose? A README that says `ruling` eleven
+  times because rulings are what it describes has vocabulary, not accent. Leave it,
+  and do not cycle synonyms to make the count go down.
 
 ### Three shapes worth more than any single word
 
