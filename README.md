@@ -28,8 +28,18 @@ Run the scanner to locate candidates for review:
 bash scan.sh path/to/file.md
 ```
 
-The scanner reports candidates, not automatic edits. Run the detector checks
-after changing a pattern or score:
+The scanner reports candidates, not automatic edits.
+
+After editing, audit the edit rather than the file. This compares the working tree
+with `HEAD`, or two files, and reports tics the edit introduced, numbers it invented,
+and facts it dropped:
+
+```sh
+bash audit.sh path/to/file.md
+bash audit.sh before.md after.md
+```
+
+Run the detector checks after changing a pattern or score:
 
 ```sh
 bash tests/check.sh

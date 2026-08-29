@@ -20,20 +20,9 @@ MID_TRIGGER=15   # 30–49 band: hits per 1,000 words above which the verb-first
 for f in "$@"; do
   [ -f "$f" ] || { echo "skip (not a file): $f" >&2; continue; }
 
-  # Blank out YAML front matter, fenced and indented code, and table rows;
-  # strip inline code spans, URLs and link targets. Line count is preserved.
-  prose=$(awk '
-    NR == 1 && /^---[ \t]*$/ { fm = 1; print ""; next }
-    fm { if (/^---[ \t]*$/) fm = 0; print ""; next }
-    /^[ \t]*```/ { fence = !fence; print ""; next }
-    fence { print ""; next }
-    /^    [^ ]/ { print ""; next }     # indented code
-    /^[ \t]*\|/ { print ""; next }     # markdown table rows
-    { gsub(/`[^`]*`/, " ")            # inline code
-      gsub(/https?:\/\/[^ )>]*/, " ")
-      gsub(/\]\([^)]*\)/, "] ")       # markdown link targets
-      print }
-  ' "$f")
+  # Blank out front matter, code and tables; strip inline code, URLs and link
+  # targets. Line count is preserved (tools/strip.awk).
+  prose=$(awk -f "$DIR/tools/strip.awk" "$f")
 
   wc_words=$(printf '%s' "$prose" | wc -w | tr -d ' ')
   [ "$wc_words" -eq 0 ] && { echo "== $f — no prose after stripping code"; continue; }

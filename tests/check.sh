@@ -15,6 +15,8 @@
 #                   the human baseline. The human baseline is real READMEs,
 #                   which measured 1.6-10.9 salient words per 1,000, none above 50.
 #   line-numbers.md front matter, a fence and a table ahead of one tic on line 15.
+#   audit/          source.md plus a bad edit (introduces a tic, invents a number,
+#                   drops one) and a good edit, for audit.sh.
 
 set -u
 DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
@@ -86,7 +88,22 @@ else
   no "lift-words.tsv is not sorted by salience"
 fi
 
-# 8. rescore.py reproduces the file it ships (needs uv + wordfreq)
+# 8. audit.sh: an edit that introduces a tic, invents a number, or drops one is caught
+A="$F/audit"
+bad=$(bash "$DIR/audit.sh" "$A/source.md" "$A/bad-edit.md" 2>&1); brc=$?
+[ "$brc" -eq 1 ] && ok "audit: bad edit exits 1" || no "audit: bad edit exited $brc, expected 1"
+printf '%s\n' "$bad" | grep -q 'tic   earns-its-place' && ok "audit: introduced tic is reported" \
+                                                       || no "audit: introduced earns-its-place not reported"
+printf '%s\n' "$bad" | grep -q 'number  2x' && ok "audit: invented number is reported" \
+                                              || no "audit: new number 2x not reported"
+printf '%s\n' "$bad" | grep -E -q 'numbers +missing: 3( |$)' && ok "audit: dropped number is reported" \
+                                                              || no "audit: missing number 3 not reported"
+good=$(bash "$DIR/audit.sh" "$A/source.md" "$A/good-edit.md" 2>&1); grc=$?
+[ "$grc" -eq 0 ] && ok "audit: good edit exits 0" || no "audit: good edit exited $grc, expected 0"
+printf '%s\n' "$good" | grep -E -q 'numbers +missing: none' && ok "audit: good edit keeps every number" \
+                                                              || no "audit: good edit lost a number"
+
+# 9. rescore.py reproduces the file it ships (needs uv + wordfreq)
 if command -v uv >/dev/null 2>&1; then
   cp "$DIR/references/lift-words.tsv" "/tmp/lw-check-$$.tsv"
   if timeout 300 uv run --quiet --with wordfreq --python 3.12 "$DIR/tools/rescore.py" >/dev/null 2>&1; then

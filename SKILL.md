@@ -232,7 +232,16 @@ requests, sharp on agent-written engineering prose and weak on marketing copy.
 
 ### Pass 4 — Audit your own output
 
-See "Over-correction" below. Non-optional.
+Before the first edit, copy the file aside (`cp FILE /tmp/deslop-before.md`),
+because `HEAD` is not the starting point when the file already had uncommitted
+changes. After editing, run `bash audit.sh /tmp/deslop-before.md FILE`, or
+`bash audit.sh FILE` when the file was clean. It reports the edit, not the document: tics
+and salient words present in the output but not the source, numbers new in the
+output, and source facts missing from the output. An introduced tic is a hard
+finding. The editor made slop, and the substitution's destination came from the
+same distribution as the original. It exits 1 on any hard finding.
+
+Then do the rhythm read the audit cannot: "Over-correction" below. Non-optional.
 
 **Landing pages and marketing copy:** also grep `references/marketing.md` for the
 formula headers your candidates match, under the same loading policy. It is the
@@ -332,7 +341,8 @@ catches it. Either cut the unsupportable claim and flag the cut, or leave the
 line and flag it. The file stays publishable at every moment.
 
 Precision-theater numbers ("save 4.7 hours a week") are the one category where
-the editor's failure mode is fabrication rather than blandness.
+the editor's failure mode is fabrication rather than blandness. A number in the
+output with no source is an invention by construction; `audit.sh` lists them.
 
 ---
 
@@ -349,6 +359,10 @@ Run this before reporting, every time:
 2. Inventory the same in the **output**.
 3. Every item in the delta must be either **deliberately cut as a duplicate** or
    **flagged in the report**.
+
+`audit.sh` does the inventory for numbers, code spans, URLs, and capitalised
+names. Names are a heuristic; the rest are exact. It cannot tell a deliberate cut
+from a loss, which is what the report is for.
 
 **Word count is not the measure.** Slop is mostly padding, so large drops are
 routine: 40–50% on marketing copy, more when the source is thin. Do not treat
@@ -473,6 +487,8 @@ Close with one sentence on how the piece reads now. No summary paragraph.
 | `tools/rescore.py` | Regenerates the `.tsv`. Carries the three scoring assumptions and why each one is there. |
 | `tests/check.sh` | Asserts the numbers this file quotes: every regex and both structural detectors fire, clean prose stays silent, line numbers hold through front matter, code and tables, the 30–49 trigger separates the fixtures, the score reproduces. Run it after touching a detector. |
 | `scan.sh` | Runs all of the above against a file. Candidates with line numbers, never findings. |
+| `audit.sh` | Scans the edit: working tree against `HEAD`, or any two files. Introduced tics and words, new numbers, missing facts, shape deltas. Exit 1 on a hard finding. |
+| `tools/strip.awk` | The one strip both scripts use: front matter, code, tables out; line count preserved. |
 | `PRIOR-ART.md` | Design rationale. Why this skill is shaped as it is, and how other deslop prompts fail. Not loaded during an edit pass. |
 
 **Word tells decay; constructions do not.** The lexical catalog has roughly a
