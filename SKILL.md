@@ -88,10 +88,10 @@ repair is almost always to delete the announcing clause and keep the thing annou
 which is usually fine and occasionally very good. It was wearing a sign.
 `references/tics.md` §2.1 has all nine with their earned-use tests.
 
-This is why a blacklist alone makes prose worse. Swap "delve" for "explore" and
-the sentence keeps its shape. **The word was rarely the problem.**
-A large share of the best repairs are deletions, not substitutions. Reach for
-the cut and the recast before the synonym.
+This is why a blacklist alone makes prose worse. Swap "delve" for "explore";
+the sentence reads the same. **The word was rarely the problem.** A large share
+of the best repairs are deletions, not substitutions. Reach for the cut and the
+recast before the synonym.
 
 **Every *substitution* needs a destination.** When you replace a word or phrase,
 prohibition alone leaves a gap the model fills with the next-nearest cliché.
@@ -141,9 +141,8 @@ context-free answer and you will hit most of them:
 
 Use the thresholds in that table directly. Open `references/discourse.md` only
 when a document sits within ~20% of a stated boundary (700–900 words for the
-signposting line, ratio 0.5–0.7 for restatement), or when the venue is one the
-table does not cleanly name. Otherwise the summaries
-here are sufficient and the file is not worth its cost.
+signposting line, ratio 0.5–0.7 for restatement), or when the venue is not in the
+table.
 
 ---
 
@@ -187,8 +186,8 @@ are about to cut is wasted work.
 ### Pass 1 — Structure · `references/discourse.md`
 
 Start with **head-and-tail deletion**: remove the first paragraph and the last,
-then read. In a large share of AI drafts nothing breaks. It catches
-the throat-clearing open and the bookend conclusion together.
+then read. In a large share of AI drafts nothing breaks. It catches the
+throat-clearing open and the bookend conclusion together.
 
 Then: restatement ratio (below ~0.6 in Short/Medium prose the piece is padded),
 paragraph-length variance, formatting used as a substitute for thinking.
@@ -198,8 +197,8 @@ paragraph-length variance, formatting used as a substitute for thinking.
 **The highest-value pass.** Prose containing zero blacklisted words is still
 unmistakable when every sentence has the same three shapes.
 
-`tics.md` carries 38 named constructions with regex detectors in `tics.tsv`. Its §2
-(27 essay tics) is what to reach for when a document is specific, voiced, carrying real
+`tics.md` carries 40 named constructions with regex detectors in `tics.tsv`. Its §2
+(29 essay tics) is what to reach for when a document is specific, voiced, carrying real
 information, and *still* reads as machine-made. That is the case `lexical.md` cannot
 solve.
 
@@ -210,14 +209,15 @@ vocabulary is 66% verbs and only 14% adjectives, and everyone's instinct is to
 hunt adjectives.
 
 `references/lift-words.tsv` ranks 1,000 words by **salience**: measured
-overrepresentation across 461k documents, multiplied by how rare the word is in general
-English. Raw overrepresentation alone puts `nothing` at #25 and `never` at
-#127, words no editor can act on, because deleting them is not a repair. Salience drops
-them to #401 and #820 while `load-bearing`, `byte-identical`, and `re-derived` hold the
-top three. **Band on the score, not the presence.** 50+ is distinctive: rule each
-instance. 30–49 is a density band, and density has a number: above 15 hits per
-1,000 words in this band, run the verb-first pass over it; below that, act only on
-marked instances. Under 30 corroborates and never triggers.
+overrepresentation across 461k documents, multiplied by how rare the word is in
+general English. Raw overrepresentation alone puts `nothing` at #25 and `never`
+at #127, words no editor can act on, because deleting them is not a repair.
+Salience drops them to #401 and #820 while `load-bearing`, `byte-identical`, and
+`re-derived` hold the top three. **Band on the score, not the presence.** 50+ is
+distinctive: rule each instance. 30–49 is a density band, and density has a
+number: above 15 hits per 1,000 words in this band, run the verb-first pass over
+it; below that, act only on marked instances. Under 30 corroborates and never
+triggers.
 
 **Rule an instance from its sentence, not from the list.** Ask three questions, in
 order. Mention or use? A word inside quotes or an example is the document talking
@@ -265,7 +265,11 @@ outnumber passives there, so the tier decides the ruling.
 - *Protected:* mechanism metonymy. "The parser rejects malformed input." Test:
   could it be true or false in a bug report? Then it is a fact, not a flourish.
 - *Cut — evaluative agency:* "the design earns its place." The verb needs a
-  judge. **Name the judge.** If it means "I think X," write that.
+  judge. **Name the judge.** If it means "I think X," write that. The cue is
+  grammatical, not lexical: an inanimate subject that earns, keeps, holds, or is
+  worth *its* something ("the sentence keeps its shape," "the file is not worth
+  its cost"), or a negated verb split by a fit adverb ("does not cleanly name,"
+  "doesn't quite land"). Detectors: `earns-its-place`, `not-quite-verb`.
 - *Cut — the terminal beat:* "The terminal expires." "The water bottle
   demonstrates." The real defect is **complement deletion**: demonstrates
   *what*? The object was dropped, which is why the verb landed last. Detector:
@@ -283,15 +287,16 @@ repair is specificity, not deletion. Find the real claim.
 
 **6. Em-dash density.** Bring the *rate* toward human baseline (~3.2 per 1,000
 words). The rule is about rate, not presence. Under ~300 words the baseline
-predicts less than one, so zero is correct and not an over-correction. It forbids a
-blanket search-and-replace at any length. This is a *model* tell,
-not an AI tell: Gemini sits at human baseline, Llama at zero, and Mark Twain
+predicts less than one, so zero is correct and not an over-correction. The rule
+forbids a blanket search-and-replace at any length. This is a *model* tell, not
+an AI tell: Gemini sits at human baseline, Llama at zero, and Mark Twain
 measured above Claude. Cutting em dashes raises semicolon density into a new
 tell.
 
-**7. Bolded lead-ins on every bullet.** *Earned* when the bolded terms are a real
-closed set the reader looks things up in, such as flags, parameters, or error codes. *Slop*
-when they are abstractions invented so that something could be bolded.
+**7. Bolded lead-ins on every bullet.** *Earned* when the bolded terms are a
+real closed set the reader looks things up in, such as flags, parameters, or
+error codes. *Slop* when they are abstractions invented so that something could
+be bolded.
 
 **8. Participial evaluative tails.** "..., making it easier to maintain." Clean
 rule: **tails that narrate are fine, tails that evaluate get cut.**
@@ -333,10 +338,10 @@ the editor's failure mode is fabrication rather than blandness.
 
 ## The conservation check
 
-The stopping condition guards *whether* to edit. This guards *how much*, which is
-the harder question and the one every run faces. On a sloppy
-page every candidate fails its test, cutting compounds, and half the document can
-disappear without any single edit being wrong.
+The stopping condition guards *whether* to edit. This guards *how much*, which
+is the harder question and the one every run faces. On a sloppy page every
+candidate fails its test, cutting compounds, and half the document can disappear
+without any single edit being wrong.
 
 Run this before reporting, every time:
 
@@ -366,10 +371,10 @@ Prose that has visibly been de-AI'd has its own signature.
 
 **Flattening is the main event.** A pass that strips every figure, coinage, and
 odd turn of phrase scores *worse* on rhythm than the draft it fixed. This is the
-most common way this skill fails, and it fails invisibly, because each individual cut
-looks defensible. A vivid phrase is not slop because it is unusual. If the writer
-coined it and it carries an image, it stays; that is exactly the kind of thing a
-model does not produce on its own.
+most common way this skill fails, and it fails invisibly, because each
+individual cut looks defensible. A vivid phrase is not slop because it is
+unusual. If the writer coined it and it carries an image, it stays; that is
+exactly the kind of thing a model does not produce on its own.
 
 Then audit for these:
 
@@ -461,8 +466,8 @@ Close with one sentence on how the piece reads now. No summary paragraph.
 | `references/discourse.md` | 38 structural patterns across 7 families, with the length × venue calibration tables. |
 | `references/lexical.md` | 123 word-level entries in 13 families, each graded `[V]` verified corpus study, `[C]` curated banlist, or `[A]` asserted. |
 | `references/marketing.md` | 22 landing-page formulas, plus the positive canon — Ogilvy, Schwartz, Wiebe, Basecamp, Linear, Stripe. |
-| `references/tics.md` | 38 named constructions — 27 essay tics, 11 Wikipedia signs of AI writing. The catalog for prose that is specific and still reads as generated. |
-| `references/tics.tsv` | The same 38 as `id<TAB>regex`. Machine-readable; edit here to tune a detector. |
+| `references/tics.md` | 40 named constructions — 29 essay tics, 11 Wikipedia signs of AI writing. The catalog for prose that is specific and still reads as generated. |
+| `references/tics.tsv` | The regex detectors for those, as `id<TAB>regex`. Machine-readable; edit here to tune a detector. |
 | `references/lift-words.tsv` | 1,000 words ranked by salience (lift × rarity in general English), with the `tf` and `idf` terms so any row's score can be audited. What `scan.sh` reads. Explained at `lexical.md` §13. |
 | `references/lift-words.txt` | The source list in raw lift order. Input to `tools/rescore.py`; not read at edit time. |
 | `tools/rescore.py` | Regenerates the `.tsv`. Carries the three scoring assumptions and why each one is there. |

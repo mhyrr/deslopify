@@ -4,11 +4,11 @@
 #   bash tests/check.sh
 #
 # Guards the numbers quoted in SKILL.md, references/tics.md and lexical.md 13.
-# Those claims -- "all 38 fire", "nothing above salience 50 on clean prose" --
+# Those claims -- "every detector fires", "nothing above salience 50 on clean prose" --
 # rot silently as patterns are tuned, so they are asserted here instead.
 #
 # Fixtures:
-#   all-tics.md     seeded with all 38 patterns; the detector floor.
+#   all-tics.md     seeded with every pattern in tics.tsv; the detector floor.
 #   agent-prose.md  agent-written engineering prose; the salience ceiling.
 #   clean-prose.md  specific, information-carrying prose that must stay quiet.
 #                   Note it is MODEL-written: it is a false-positive guard, not

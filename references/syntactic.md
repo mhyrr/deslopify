@@ -117,7 +117,8 @@ Add a fourth, paragraph-level factor:
 
 ### Tier 2 — Evaluative Agency *(the core tic)*
 - **Shape:** `[abstract noun] + [verb of judgment / volition / cognition / self-disclosure] (+ optional reflexive or possessive object)`
-  - Sub-shapes: `X earns its keep` · `X wants Y` · `X knows Y` · `X reveals itself` · `X does the work` · `X argues for Y` · `X deserves Y` · `X refuses to Y`
+  - Sub-shapes: `X earns its keep` · `X wants Y` · `X knows Y` · `X reveals itself` · `X does the work` · `X argues for Y` · `X deserves Y` · `X refuses to Y` · `X keeps its shape` · `X is not worth its cost` · `X does not cleanly Y`
+  - Detectors: `earns-its-place` (judgment verb + *its/itself*) and `not-quite-verb` (negated auxiliary split by a fit adverb) in `tics.tsv`. The possessive and the split are the regex hooks; the vocabulary inside them varies.
 - **Why it reads as AI:** The verb requires a mind the subject does not have, so the sentence quietly converts the writer's opinion into a reported event — it sounds like insight while asserting nothing checkable.
 - **Specimens:**
   1. "The abstraction reveals itself once you trace a single request end to end."

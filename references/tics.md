@@ -1,6 +1,6 @@
 # Rhetorical tics — the essay-voice catalog
 
-38 patterns. The 27 in §2 are the **essay tics**: constructions a model reaches for
+40 patterns. The 29 in §2 are the **essay tics**: constructions a model reaches for
 when it is trying to sound like a good writer. The 11 in §3 are the **Wikipedia
 signs**: the SEO-flavored tells of generic assistant prose.
 
@@ -24,7 +24,7 @@ echoing sentence runs, repeated sentence openers, stacked rhetorical questions.
 
 ## 1. The one thing to understand before using this file
 
-**Nine of the 27 essay tics are the same move.** They announce that something matters
+**Nine of the 29 essay tics are the same move.** They announce that something matters
 instead of making it matter — "that's the whole point," "this is the entire business
 model," "that's not nothing," "worth naming." SKILL.md's governing test already covers
 them: ask what the sentence is carrying. These carry the *report* of significance and
@@ -238,6 +238,33 @@ all five.
 
 ---
 
+### 2.7 Hidden judge (2)
+
+The evaluation is made; the evaluator is gone. `syntactic.md` Tier 2 (evaluative
+agency) carries the theory. These two are its most frequent surface shapes, and the
+detectors key on the grammar around the judgment, not on any word in it.
+
+**`earns-its-place`** — "The design earns its place." "The sentence keeps its shape."
+"The file is not worth its cost." "The abstraction pays for itself." An inanimate
+subject, a verb of judgment, and a possessive or reflexive object: *its place, its
+keep, its weight, itself*. The possessive is the animacy marker; the verb is the
+opinion.
+*Earned:* almost never in this form. "The cache pays for itself" is earned when a
+number follows it.
+*Repair:* name the judge and the measure. "The design earns its place" → "We kept
+the design because it survived the schema change." With no measure to give, the
+sentence was an opinion: write "I think," or cut it.
+
+**`not-quite-verb`** — "The table does not cleanly name the venue." "The metaphor
+doesn't quite land." "The test does not fully capture the bug." "The layers separate
+neatly." A negated auxiliary split by a degree adverb, or a fit adverb (*cleanly,
+neatly, squarely, gracefully, elegantly*) anywhere. The adverb grades a fit nobody
+measured, and the negation lets the writer skip saying what X *does* do.
+*Earned:* when the adverb is literal and checkable ("the page does not fully load":
+a percentage exists).
+*Repair:* drop the adverb and state the positive: "the venue is not in the table."
+If the adverb carried a real degree, give the degree.
+
 ## 3. Wikipedia signs of AI writing (11)
 
 Mostly already catalogued. Entries here give the detector and the one-line ruling; the
@@ -310,7 +337,7 @@ every regex hit with line numbers, and salience-ranked vocabulary.
 
 Calibration on real documents — four human-written technical READMEs (abseil, apache-arrow,
 aws-c-common, ada-url) scored 1.6–10.9 salient words per 1,000 with nothing above salience
-50; a file seeded with all 38 scored 58.6/1k with nothing above 50, and agent-written
+50; a file seeded with all 40 scored 67.5/1k with nothing above 50, and agent-written
 engineering prose 294/1k with eight above 50. The gap is wide, which is what makes a middling score worth
 reading rather than acting on.
 

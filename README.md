@@ -13,7 +13,7 @@ the pattern catalogs and supporting data.
 
 ## Sources
 
-The 38 sentence patterns began with Simon Willison's
+The sentence patterns began with Simon Willison's
 [LLM cliché highlighter](https://tools.simonwillison.net/llm-cliche-highlighter).
 Deslopify adds editing tests and repair guidance for each pattern.
 
