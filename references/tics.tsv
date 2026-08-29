@@ -1,0 +1,35 @@
+no-x-no-y	\bno +[a-z][a-z-]*, *no +[a-z]
+thats-the-whole	\b(that|this)('s| is) the whole\b
+did-not-chains	\b(didn.t|did not) [a-z]+,[^.]*\b(didn.t|did not)\b
+dont-verb-it	\b(don.t|do not) [a-z]+ it[.,]?[^.]{0,40}\. *[A-Z][a-z]+ it\b
+sit-with-that	\bsit with (that|this|it|the discomfort)\b
+you-already-know	\byou already know\b
+is-the-entire	\bis the entire\b
+the-entire-is	\bthe entire [a-z ]{1,30} is\b
+is-real-and-not	\bis (the )?real([,;.]| and\b| but\b| not\b)
+the-punchline-is	\bthe punchline\b
+worth-naming	\bworth naming\b
+thats-not-nothing	\b(that|this|it|which) (is|.s) not nothing\b
+is-the-whole-x	\bis the whole (point|trick|pitch|idea|thing|game|argument)\b|\bhere.s the whole\b
+performative-honesty	\b(i won.t pretend|i.ll be honest|let.s be honest|to be clear|to be honest)\b|(^|\. )(Honestly|Look),
+thats-the-part	\b(that.s|that is|this is) the part\b|\bmy favou?rite part\b
+the-only-x-i-trust	\bthe only [a-z ]{1,25} (i trust|it needs|that matters)\b
+dont-take-my-word	\btake my word for (it|any of this)\b
+turns-out	\b(it )?turns out\b
+fits-in-your-head	\b(fits? in your head|hold in your head|batteries included|it just works|zero.config|sane defaults)\b
+colon-into-triple	: +[a-z][^.:;]*, [^.:;]*, [^.:;]*[.]
+heres-the-twist	\bhere.s the (twist|thing|catch|kicker|rub|first example)\b
+x-is-dead	\b[a-z][a-z ]{2,30} is dead\b|\blong live\b
+thats-why-x-mattered	\b(that.s|this is|that is) why [^.]{2,60} matter(ed|s)\b
+stranded-auxiliary	\b(did|does|do|is|was|were|has|have|had|would|could|will|might|should)n.t\.
+ai-vocabulary	\b(delve|tapestr|meticulous|pivotal|intricat|interplay|underscor|garner|bolster|vibrant|bustling|multifaceted|seamless|ever-evolving)
+not-just-x-but-y	\bnot just [^.]{1,40}\bbut\b|\bnot only [^.]{1,40}\bbut\b|\bit.s not [^.]{1,30}(—|--) it.s\b
+important-to-note	\b(it is|it.s) (important|worth) (to note|noting)\b|\bit should be noted\b|\bworth (pausing|considering|asking|noting)\b
+stands-as-a-testament	\b(stands|serves) as a (testament|reminder)\b|\bis a testament to\b
+plays-a-crucial-role	\bplays? an? (crucial|pivotal|vital|key|significant|important) role\b
+ever-evolving-landscape	\b(ever-evolving|ever-changing|rapidly (evolving|changing)|shifting) (landscape|world|environment)\b|\bin today.s fast-paced\b
+experts-argue	\b(experts|critics|observers|analysts|researchers|studies|industry reports) (argue|say|note|have noted|suggest|indicate|show)\b
+despite-these-challenges	\bdespite these challenges\b|\bfaces? several challenges\b|\bchallenges remain\b|\bremains to be seen\b|\btime will tell\b
+participle-tails	, (highlighting|underscoring|showcasing|reflecting|emphasi[sz]ing|demonstrating|ensuring|allowing|making) (the|it|a|you|us|them)\b
+promotional-boilerplate	\b(nestled in|in the heart of|rich (tapestry|heritage)|hidden gem|boasts a|breathtaking|stunning views|must-visit|world-class)\b
+chatbot-leftovers	\b(as an AI( language)? model|as of my last (update|knowledge)|knowledge cutoff|I do ?n.t have (access|the ability))\b|oaicite|contentReference|turn0search|utm_source=
