@@ -212,12 +212,12 @@ Lowest value, most visible, easiest to overdo. **Go verb-first** — measured ex
 vocabulary is 66% verbs and only 14% adjectives, and everyone's instinct is to
 hunt adjectives.
 
-`references/lift-words.tsv` ranks 487 words by **salience** — measured
+`references/lift-words.tsv` ranks 1,000 words by **salience** — measured
 overrepresentation across 461k documents, multiplied by how rare the word is in general
 English. The product matters: raw overrepresentation puts `nothing` at #25 and `never` at
 #127, words no editor can act on, because deleting them is not a repair. Salience drops
-them to #233 and #425 while `load-bearing`, `byte-identical`, and `re-derived` hold the
-top four. **Band on the score, not the presence:** 50+ is distinctive, 30–49 is density
+them to #401 and #820 while `load-bearing`, `byte-identical`, and `re-derived` hold the
+top three. **Band on the score, not the presence:** 50+ is distinctive, 30–49 is density
 only, under 30 corroborates and never triggers. Read `lexical.md` §13 before using it, and
 note the corpus is GitHub pull requests — sharp on agent-written engineering prose, weak on
 marketing copy.
@@ -453,7 +453,7 @@ Close with one sentence on how the piece reads now. No summary paragraph.
 | `references/marketing.md` | 22 landing-page formulas, plus the positive canon — Ogilvy, Schwartz, Wiebe, Basecamp, Linear, Stripe. |
 | `references/tics.md` | 38 named constructions — 27 essay tics, 11 Wikipedia signs of AI writing. The catalog for prose that is specific and still reads as generated. |
 | `references/tics.tsv` | The same 38 as `id<TAB>regex`. Machine-readable; edit here to tune a detector. |
-| `references/lift-words.tsv` | 487 words ranked by salience (lift × rarity in general English), with the `tf` and `idf` terms so any row's score can be audited. What `scan.sh` reads. Explained at `lexical.md` §13. |
+| `references/lift-words.tsv` | 1,000 words ranked by salience (lift × rarity in general English), with the `tf` and `idf` terms so any row's score can be audited. What `scan.sh` reads. Explained at `lexical.md` §13. |
 | `references/lift-words.txt` | The source list in raw lift order. Input to `tools/rescore.py`; not read at edit time. |
 | `tools/rescore.py` | Regenerates the `.tsv`. Carries the three scoring assumptions and why each one is there. |
 | `tests/check.sh` | Asserts the numbers this file quotes: all 38 patterns fire, clean prose stays silent, the score reproduces. Run it after touching a detector. |

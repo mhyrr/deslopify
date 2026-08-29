@@ -16,5 +16,5 @@ per-region fairness rather than global quota. And it does not distinguish
 expensive endpoints from cheap ones. Both are tracked in issue 412.
 
 To change the limits, edit `config/limits.exs` and deploy. There is no runtime
-override, deliberately: a limit you can change without a deploy is a limit
-nobody can audit later.
+override. A limit you can change without a deploy is a limit that no one can
+audit later.

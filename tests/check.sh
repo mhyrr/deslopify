@@ -13,7 +13,7 @@
 #   clean-prose.md  specific, information-carrying prose that must stay quiet.
 #                   Note it is MODEL-written: it is a false-positive guard, not
 #                   the human baseline. The human baseline is real READMEs,
-#                   which measured 0-1.5 salient words per 1,000.
+#                   which measured 1.6-10.9 salient words per 1,000, none above 50.
 
 set -u
 DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
@@ -55,7 +55,7 @@ cstrong=$(bash "$DIR/scan.sh" "$F/clean-prose.md" | sed -n 's/.*; \([0-9]*\) at 
 
 # 5. the scored list is intact and ordered
 rows=$(grep -vc '^#' "$DIR/references/lift-words.tsv")
-[ "$rows" -eq 487 ] && ok "lift-words.tsv has 487 rows" || no "lift-words.tsv has $rows rows, expected 487"
+[ "$rows" -eq 999 ] && ok "lift-words.tsv has 999 rows" || no "lift-words.tsv has $rows rows, expected 999"
 if awk -F'\t' '!/^#/{if(p!="" && $5>p+0.05) exit 1; p=$5}' "$DIR/references/lift-words.tsv"; then
   ok "lift-words.tsv is sorted by descending salience"
 else

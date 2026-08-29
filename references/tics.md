@@ -308,9 +308,10 @@ table rows and URLs, then reports: word count and length band, em-dash rate agai
 3.2/1k human baseline, sentence-length distribution, the three computed structural tics,
 every regex hit with line numbers, and salience-ranked vocabulary.
 
-Calibration on real documents — four human-written technical READMEs scored 0–1.5 salient
-words per 1,000 with nothing above salience 50, and two `ai-vocabulary` hits between them
-and no other tic; a file seeded with all 38 scored 44.8/1k. The gap is wide, which is what makes a middling score worth
+Calibration on real documents — four human-written technical READMEs (abseil, apache-arrow,
+aws-c-common, ada-url) scored 1.6–10.9 salient words per 1,000 with nothing above salience
+50; a file seeded with all 38 scored 58.6/1k with nothing above 50, and agent-written
+engineering prose 294/1k with eight above 50. The gap is wide, which is what makes a middling score worth
 reading rather than acting on.
 
 **Order of operations.** Scan *after* Pass 1, not before. Head-and-tail deletion removes

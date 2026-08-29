@@ -1567,17 +1567,19 @@ game changer, in addition, in summary, knowledge gap, shed light, vital role
 
 # 13. The lift list — measured overrepresentation `[V]`
 
-487 words, measured over **461,121 documents and 51.1M word appearances across 85 weeks
+1,000 words, measured over **461,121 documents and 51.1M word appearances across 85 weeks
 (2025–2026)** from the load-bearing dashboard (<https://louisabraham.github.io/load-bearing/>).
 
 Two files, and the difference matters:
 
 - **`lift-words.txt`** — the source, in the published order: descending **lift**, how much
   more often a word appears in LLM text than in a matched human baseline. `load-bearing`
-  tops it at **39.5×**; the tail of the published 1,000 sits near **5×**. Input only.
+  tops it at **39.5×**; the tail at #1,000 sits near **5×**. Input only.
 - **`lift-words.tsv`** — the working file, re-ranked by **salience**. Carries the `tf`
   and `idf` terms alongside the score, so any row can be audited without rerunning
-  anything. `scan.sh` reads columns 1, 2 and 5; the rest show the working. Regenerate with
+  anything. `scan.sh` reads columns 1, 2 and 5; the rest show the working. 999 rows: the published
+  list counts the em dash as a word (lift #852), and `scan.sh` measures em dashes directly,
+  so that entry keeps its rank but gets no row. Regenerate with
   `uv run --with wordfreq --python 3.12 tools/rescore.py`, and `bash tests/check.sh`
   asserts that the committed file is what the script produces.
 
@@ -1598,8 +1600,8 @@ unusual in English at all — lift × rarity, the same shape as TF-IDF. Rarity c
 **The combination is a product, not a sum, and that is the whole design.** A sum lets
 either term rescue a word, which promotes engineering jargon that is rare in general
 English but ordinary in a pull request: `greps`, `diffed`, `retargets`, and `grepped` all
-landed in the top 32 under a sum, on lift ranks of 244–392. The product requires both, so
-weakness on either axis is fatal — `greps` sits at #173 instead of #26. Nothing rises on
+landed in the top 28 under a sum, on lift ranks of 244–392. The product requires both, so
+weakness on either axis is fatal — `greps` sits at #95 instead of #22. Nothing rises on
 rarity alone.
 
 What moved:
@@ -1608,12 +1610,12 @@ What moved:
 |---|---|---|
 | `load-bearing` | 1 | **1** |
 | `byte-identical` | 16 | **2** |
-| `re-derived` | 6 | **4** |
-| `chokepoint` | 58 | **14** |
-| `nothing` | 25 | 233 |
-| `never` | 127 | 425 |
-| `four` | 428 | 467 |
-| `said` | 335 | 477 |
+| `re-derived` | 6 | **3** |
+| `chokepoint` | 58 | **8** |
+| `nothing` | 25 | 401 |
+| `never` | 127 | 820 |
+| `four` | 428 | 802 |
+| `said` | 335 | 939 |
 
 **Three assumptions, all disclosed in `tools/rescore.py`, all one constant from changing.**
 Lift is *modelled from rank* — the source publishes rank order and only two lift values, so
@@ -1623,7 +1625,7 @@ Zipf penalty**, because `wordfreq` splits `byte-identical` into *byte* + *identi
 returns 3.11 — scoring a minted compound as more common than the dictionary word
 `chokepoint` at 1.46. It answers "how plausible is this compound" when the question is "how
 often does this exact string occur," which for a coinage is never; minting it is the tell.
-Six words absent from `wordfreq` entirely get a **0.8 floor** rather than infinite rarity,
+Twenty-one words absent from `wordfreq` entirely get a **0.8 floor** rather than infinite rarity,
 since zero is a sentinel for "not in corpus," not a measurement.
 
 ### Why this list is different from every other list in this file
@@ -1669,20 +1671,21 @@ Band on the salience score, which `scan.sh` prints beside every hit:
 
 | Salience | Ruling |
 |---|---|
-| **50+** (23 words) | Distinctive. One instance is worth reading in context; two of the same word is a finding. |
+| **50+** (38 words) | Distinctive. One instance is worth reading in context; two of the same word is a finding. |
 | **30–49** | Density only. Cross-reference against the families above and `tics.md` before acting. |
 | **under 30** | Corroborating evidence, never a trigger. Do not edit a word because it appears here. |
 
-Calibration: four human-written technical READMEs scored **0–1.5 hits per 1,000 words with
-nothing above salience 50**; a paragraph of agent-written engineering prose scored **274/1k
-with 8 words above 50**. Treat **any two hits at 50+** as worth a close read. Below that,
+Calibration: four human-written technical READMEs (abseil, apache-arrow, aws-c-common,
+ada-url) scored **1.6–10.9 hits per 1,000 words with nothing above salience 50**; a
+paragraph of agent-written engineering prose scored **294/1k with 8 words above 50**. The
+raw hit count includes the ordinary words that score under 30, so read the 50+ count first. Treat **any two hits at 50+** as worth a close read. Below that,
 the list has told you nothing.
 
 ### Three shapes worth more than any single word
 
 The list's real value is not its members but what they have in common.
 
-1. **Coined hyphenated compounds — 66 of 487 (14%).** Salience ranks these hardest, by
+1. **Coined hyphenated compounds — 159 of 1,000 (16%).** Salience ranks these hardest, by
    construction: six of the top fifteen are compounds. `byte-identical`, `mutation-checked`,
    `self-heals`, `fail-loud`, `behaviour-preserving`, `caller-supplied`, `data-loss`,
    `fall-through`. Minting a precise-sounding compound is the single most distinctive move
@@ -1706,7 +1709,7 @@ of rewriting hides them. Check spelling register before anything else.
 ### How not to use it
 
 Not as a banlist, and never with `sed`. Every §0 warning applies with more force here,
-because a ranked list of 487 words is exactly the artifact that invites a mechanical pass.
+because a ranked list of 1,000 words is exactly the artifact that invites a mechanical pass.
 Rank tells you where to look. The context tells you whether there is anything there.
 
 
@@ -1731,6 +1734,6 @@ Rank tells you where to look. The context tells you whether there is anything th
 - load-bearing, measured word lift over 461k PRs — <https://louisabraham.github.io/load-bearing/>
 - LLM cliché highlighter (38 patterns) — transcribed into `tics.md`
 
-**Entry count:** 123 catalog entries across 13 families, plus the §14 lift list (487 ranked words) (65 Tier 1, 42 Tier 2, 13 Tier 3, 3 split),
+**Entry count:** 123 catalog entries across 13 families, plus the §14 lift list (1,000 ranked words) (65 Tier 1, 42 Tier 2, 13 Tier 3, 3 split),
 plus the 135-term verified appendix. Many entries are families rather than single terms, so the
 underlying vocabulary covered is roughly 350 distinct words and phrases.

@@ -16,9 +16,9 @@ attention only when it is BOTH overrepresented and unusual in English at all.
 The combination is a product, not a sum, and that is the whole design. A sum
 lets either term rescue a word, which promotes engineering jargon that is rare
 in general English but ordinary in the source corpus: greps, diffed, retargets,
-grepped all landed in the top 32 under a sum despite lift ranks of 244-392. A
+grepped all landed in the top 28 under a sum despite lift ranks of 244-392. A
 product requires both, so weakness on either axis is fatal. Measured effect:
-greps #308 -> #173 under the product vs #26 under the sum.
+greps #308 -> #95 under the product vs #22 under the sum.
 
 ASSUMPTIONS, all three arguable and all three one constant away from changing:
 
@@ -36,12 +36,17 @@ ASSUMPTIONS, all three arguable and all three one constant away from changing:
    compound is itself the tell, so every hyphenated form takes the penalty.
    Relative order among compounds is preserved.
 
-3. UNKNOWN-WORD FLOOR (0.8 zipf). Six entries are absent from wordfreq entirely
-   (unparseable, adversarially, diffed, greps, retargets, grepped). Zero is a
-   sentinel for "not in corpus", not a measurement, so treating it as infinite
-   rarity would be reading precision into an absence.
+3. UNKNOWN-WORD FLOOR (0.8 zipf). Twenty-one entries are absent from wordfreq
+   entirely (unparseable, adversarially, diffed, greps, sigkill, mtime,
+   gitignored, ...). Zero is a sentinel for "not in corpus", not a measurement,
+   so treating it as infinite rarity would be reading precision into an absence.
+
+ONE ENTRY IS DROPPED. The published list counts the em dash as a word (lift
+rank 852). It keeps its rank here so nothing below it shifts, but it gets no
+row: scan.sh tokenises on letters and digits so the row could never match, and
+the em-dash rate is measured directly. 1,000 words in, 999 rows out.
 """
-import math, pathlib
+import math, pathlib, re
 from wordfreq import zipf_frequency
 
 HYPHEN_PENALTY = 1.5   # zipf units subtracted from any hyphenated compound
@@ -68,6 +73,8 @@ def main() -> None:
     words = [w.strip() for w in SRC.read_text().splitlines() if w.strip()]
     rows = []
     for rank, word in enumerate(words, 1):
+        if not re.search(r"[A-Za-z0-9]", word):
+            continue                      # the em-dash token; see docstring
         log_lift = math.log10(LIFT_AT_RANK_1 * rank ** -LIFT_EXPONENT)
         rows.append({"word": word, "lift_rank": rank,
                      "zipf": zipf_frequency(word, "en"),
