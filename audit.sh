@@ -49,7 +49,8 @@ hits() {  # $1 = prose text
 # -- fact inventory on the light strip: kind<TAB>item ----------------------------------
 facts() {  # $1 = light text
   local t=$1
-  printf '%s\n' "$t" | grep -o -E '[0-9]+([.,][0-9]+)*(%|×|x|k|kb|mb|ms)?' | tr 'A-Z' 'a-z' | sed 's/^/num\t/'
+  printf '%s\n' "$t" | sed -E 's/^[ \t]*[0-9]+\.[ \t]+//' \
+    | grep -o -E '[0-9]+([.,][0-9]+)*(%|×|x|k|kb|mb|ms)?' | tr 'A-Z' 'a-z' | sed 's/^/num\t/'   # list markers are not numbers
   printf '%s\n' "$t" | grep -o -E '`[^`]+`' | sed 's/^/code\t/'
   printf '%s\n' "$t" | grep -o -E 'https?://[^ )>]+' | sed 's/^/url\t/'
   printf '%s\n' "$t" | awk '
@@ -118,7 +119,7 @@ echo
 echo "conservation  (source items absent from the output: flag each in the report, or confirm the cut)"
 awk -F'\t' 'NR == FNR { sc[$1 "\t" $2]++; next } { oc[$1 "\t" $2]++ }
      END { for (k in sc) { d = sc[k] - (k in oc ? oc[k] : 0); if (d <= 0) continue; split(k, p, "\t"); miss[p[1]] = miss[p[1]] " " p[2] (d > 1 ? "(x" d ")" : "") }
-           split("num code url name", order, " "); lab["num"] = "numbers"; lab["code"] = "code spans"; lab["url"] = "urls"; lab["name"] = "names (soft: capitalisation heuristic)"
+           split("num code url name", order, " "); lab["num"] = "numbers"; lab["code"] = "code spans"; lab["url"] = "urls"; lab["name"] = "names (soft: capitalization heuristic)"
            for (i = 1; i <= 4; i++) { o = order[i]; printf "  %-40s missing:%s\n", lab[o], (o in miss ? miss[o] : " none") } }' "$sf" "$of"
 
 echo

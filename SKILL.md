@@ -219,13 +219,16 @@ number: above 15 hits per 1,000 words in this band, run the verb-first pass over
 it; below that, act only on marked instances. Under 30 corroborates and never
 triggers.
 
-**Rule an instance from its sentence, not from the list.** Ask three questions, in
-order. Mention or use? A word inside quotes or an example is the document talking
-about slop, not committing it; skip it. Does it sit inside a tic hit? Then the word
-is the construction's symptom: repair the construction and the word goes with it,
-and that intersection makes a 30–49 word actionable on its own. Is it the
-document's term of art, defined once and repeated on purpose? Then it is
-vocabulary, not accent. Leave it, and do not cycle synonyms.
+**Rule an instance from its sentence, not from the list.** Three questions, in
+order:
+
+1. Mention or use? A word inside quotes or an example is the document talking
+   about slop, not committing it. Skip it.
+2. Does it sit inside a tic hit? Then the word is the construction's symptom:
+   repair the construction and the word goes with it. That intersection makes a
+   30–49 word actionable on its own.
+3. Is it the document's term of art, defined once and repeated on purpose? Then
+   it is vocabulary, not accent. Leave it, and do not cycle synonyms.
 
 Read `lexical.md` §13 before using the list, and note the corpus is GitHub pull
 requests, sharp on agent-written engineering prose and weak on marketing copy.
@@ -235,11 +238,11 @@ requests, sharp on agent-written engineering prose and weak on marketing copy.
 Before the first edit, copy the file aside (`cp FILE /tmp/deslop-before.md`),
 because `HEAD` is not the starting point when the file already had uncommitted
 changes. After editing, run `bash audit.sh /tmp/deslop-before.md FILE`, or
-`bash audit.sh FILE` when the file was clean. It reports the edit, not the document: tics
-and salient words present in the output but not the source, numbers new in the
-output, and source facts missing from the output. An introduced tic is a hard
-finding. The editor made slop, and the substitution's destination came from the
-same distribution as the original. It exits 1 on any hard finding.
+`bash audit.sh FILE` when the file was clean. It reports the edit, not the
+document: tics and salient words present in the output but not the source,
+numbers new in the output, and source facts missing from the output. An
+introduced tic is a hard finding: the editor made slop. It exits 1 on any hard
+finding.
 
 Then do the rhythm read the audit cannot: "Over-correction" below. Non-optional.
 
@@ -342,7 +345,7 @@ line and flag it. The file stays publishable at every moment.
 
 Precision-theater numbers ("save 4.7 hours a week") are the one category where
 the editor's failure mode is fabrication rather than blandness. A number in the
-output with no source is an invention by construction; `audit.sh` lists them.
+output that is not in the source was invented; `audit.sh` lists them.
 
 ---
 
@@ -360,7 +363,7 @@ Run this before reporting, every time:
 3. Every item in the delta must be either **deliberately cut as a duplicate** or
    **flagged in the report**.
 
-`audit.sh` does the inventory for numbers, code spans, URLs, and capitalised
+`audit.sh` does the inventory for numbers, code spans, URLs, and capitalized
 names. Names are a heuristic; the rest are exact. It cannot tell a deliberate cut
 from a loss, which is what the report is for.
 
