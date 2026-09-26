@@ -1,6 +1,6 @@
 ---
 name: deslopify
-description: "Use when prose sounds machine-written and needs the accent removed — the user says 'deslopify', 'this sounds like AI', 'sounds like Claude wrote it', 'remove the AI voice', 'make this sound human', 'de-slop this', 'AI slop', or points at copy that reads generic and templated. Targets landing pages, marketing copy, README intros, docs, announcements, and any prose written for a human reader. For writing copy from scratch see copywriting; for sharpening persuasion and conversion see copy-editing — this skill only removes the machine accent and can run before or after either."
+description: "Use when prose reads as machine-written and the user wants the accent removed: they call it AI slop, AI-sounding, generic, or templated, or ask to deslopify it. Works on landing pages, marketing copy, READMEs, docs, announcements, and other prose for human readers; not essays or personal writing. Changes how things are said, never what they claim; it does not draft new copy or sharpen persuasion, and can run before or after either."
 metadata:
   version: 1.2.0
 ---
@@ -12,8 +12,9 @@ Remove the machine accent from prose without flattening it.
 Copy can be clear, correct, and persuasive and still announce that a model wrote
 it. That signal is the target.
 
-**Not this skill's job:** persuasion quality (`copy-editing`), drafting
-(`copywriting`), grammar, or fact-checking.
+**Not this skill's job:** persuasion quality, drafting, grammar, or
+fact-checking. Nor essays or personal writing: there the writer finds the
+leaks and fixes them in their own words, so rewriting defeats the point.
 
 **Target.** Edit what the user named. If they named nothing, take the prose in
 the files changed in the working tree (`git status`): prose only, skipping code,
@@ -168,7 +169,7 @@ Structural fixes delete whole sentences, so fixing words inside a paragraph you
 are about to cut is wasted work.
 
 > **Loading policy.** The worked set below is the default and is usually enough.
-> The catalogs total ~270KB. Reading them to edit a short page costs more than
+> The catalogs total ~300KB. Reading them to edit a short page costs more than
 > the edit is worth. When a candidate is not in the worked set, **grep the
 > reference for its headers** and read the matching entry. Do not read a
 > reference end to end. The arrows below say where a pattern lives, not that you
@@ -319,8 +320,8 @@ rule: **tails that narrate are fine, tails that evaluate get cut.**
 
 Some tics are invisible line by line and only appear across the whole piece.
 
-- **Density.** Three or more patterns per 200 words reads as machine-written even
-  when each instance individually passes its earned-use test.
+- **Density.** When patterns cluster, several to a paragraph, the piece reads as
+  machine-written even when each instance passes its earned-use test.
 - **Cardinality uniformity.** Any single rule-of-three may be honest. Three
   triads in a row is the tell. Count real items, then match the number.
 - **Distribution width.** LLM prose clusters narrowly on sentence length,
@@ -413,8 +414,9 @@ anything? Was the amount of cutting proportional to the actual slop?*
 
 ## Voice
 
-If `~/.hive/personas/dry.md` exists, read it. It carries the user's register and
-its own tic list. If the project has a voice or style document, read that.
+If `~/.hive/personas/dry.md` exists and the prose is working or technical copy,
+read it; it carries the user's dry register and its own tic list. It does not
+cover essays. If the project has a voice or style document, read that.
 
 If the user supplies writing samples and they conflict with these rules, **the
 samples win.** Do not fall back on a default professional register. That default
@@ -450,14 +452,15 @@ Edit, then report grouped by pattern family rather than line order. Family
 grouping shows the pattern; line order shows a list.
 
 No rubric, no score. Named pattern, quoted line, concrete fix: evidence the
-reader can check.
+reader can check. The example is illustrative.
 
 ```
 ✎ 14 edits across 3 families
 
-Animacy inflation — terminal beat (4)
+Animacy inflation — evaluative agency (4)
   L31  "The architecture earns its place."
      → "We chose this architecture because it survives a schema change."
+        (reason moved up from L28, not supplied by the editor)
 
 Em-dash density (6)   9.1 → 3.4 per 1k words
   L12  "fast — and finally yours"
